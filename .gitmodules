@@ -1,0 +1,3 @@
+[submodule "Snap"]
+	path = snap
+	url = https://github.com/jmoenig/Snap.git
