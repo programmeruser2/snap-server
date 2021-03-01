@@ -159,7 +159,7 @@ SpriteMorph.prototype.blockColor = {
     variables : new Color(243, 118, 29),
     lists : new Color(217, 77, 17),
     other : new Color(150, 150, 150),
-    serverside : new Color(255, 255, 0)
+    serverside : new Color(180, 150, 100)
 };
 
 SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
@@ -1516,6 +1516,13 @@ SpriteMorph.prototype.initBlocks = function () {
             spec: 'video %vid on %self',
             defaults: [['motion'], ['myself']]
         },
+
+        //Serverside
+        reportServersideJSFunction: {
+            type: 'reporter',
+            category: 'serverside',
+            spec: 'Serverside Javascript Function ( %mult%s ) { %code }'
+        }
     };
 };
 
@@ -2846,7 +2853,9 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         }
 
         blocks.push(this.makeBlockButton());
- 	}
+ 	} else if (cat === 'serverside') {
+        blocks.push(block('reportServersideJSFunction'));
+    }
     return blocks;
 };
 
@@ -7627,6 +7636,15 @@ SpriteMorph.prototype.newSoundName = function (name, ignoredSound) {
     return newName;
 };
 
+// Serverside blocks
+
+SpriteMorph.prototype.reportServersideJSFunction = function (argsList, body) {
+    //console.log(args, body);
+    return (...args) => window.serversideSocket.send(`(function (${argsList.itemsArray().join(', ')}) { 
+        ${body} 
+    })(${args.slice(1).join(', ')})`);
+};
+
 // SpriteHighlightMorph /////////////////////////////////////////////////
 
 // SpriteHighlightMorph inherits from Morph:
@@ -9007,6 +9025,8 @@ StageMorph.prototype.blockTemplates = function (category) {
         }
 
         blocks.push(this.makeBlockButton());
+    } else if (cat === 'serverside') {
+        blocks.push(block('reportServersideJSFunction'));
     }
     return blocks;
 };
@@ -9659,6 +9679,9 @@ StageMorph.prototype.globalBlocksSending = function (message, receiverName) {
     });
     return all;
 };
+
+// Serverside blocks
+StageMorph.prototype.reportServersideJSFunction = SpriteMorph.prototype.reportServersideJSFunction;
 
 // SpriteBubbleMorph ////////////////////////////////////////////////////////
 
