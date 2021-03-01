@@ -144,7 +144,8 @@ SpriteMorph.prototype.categories =
         'pen',
         'variables',
         'lists',
-        'other'
+        'other',
+        'http'
     ];
 
 SpriteMorph.prototype.blockColor = {
@@ -157,13 +158,13 @@ SpriteMorph.prototype.blockColor = {
     operators : new Color(98, 194, 19),
     variables : new Color(243, 118, 29),
     lists : new Color(217, 77, 17),
-    other: new Color(150, 150, 150)
+    other : new Color(150, 150, 150),
+    http : new Color(255, 255, 0)
 };
 
 SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
 SpriteMorph.prototype.paletteTextColor = new Color(230, 230, 230);
-SpriteMorph.prototype.sliderColor
-    = SpriteMorph.prototype.paletteColor.lighter(30);
+SpriteMorph.prototype.sliderColor = SpriteMorph.prototype.paletteColor.lighter(30);
 SpriteMorph.prototype.isCachingPrimitives = true;
 
 SpriteMorph.prototype.enableNesting = true;
