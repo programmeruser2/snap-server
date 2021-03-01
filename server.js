@@ -20,7 +20,7 @@ wss.on('connection', ws => {
         Event,
         EventTarget,
         exports,
-        global: Object.assign({}, global),
+        global: contextObject,
         MessageChannel,
         MessageEvent,
         MessagePort,
@@ -34,7 +34,8 @@ wss.on('connection', ws => {
         TextEncoder,
         URL,
         URLSearchParams,
-        WebAssembly
+        WebAssembly,
+        runClientsideJS: code => ws.send(code)
     };
     vm.createContext(contextObject);
     ws.on('message', code => {
