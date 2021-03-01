@@ -145,7 +145,7 @@ SpriteMorph.prototype.categories =
         'variables',
         'lists',
         'other',
-        'http'
+        'serverside'
     ];
 
 SpriteMorph.prototype.blockColor = {
@@ -159,7 +159,7 @@ SpriteMorph.prototype.blockColor = {
     variables : new Color(243, 118, 29),
     lists : new Color(217, 77, 17),
     other : new Color(150, 150, 150),
-    http : new Color(255, 255, 0)
+    serverside : new Color(255, 255, 0)
 };
 
 SpriteMorph.prototype.paletteColor = new Color(55, 55, 55);
